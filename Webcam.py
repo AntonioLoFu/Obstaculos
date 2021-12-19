@@ -10,7 +10,9 @@ def __main__(camara = 0):
         # Capture the video frame
         # by frame
         ret, frame = VID.read()
-    
+
+
+
         # Display the resulting frame
         cv2.imshow('frame', frame)
         
@@ -24,5 +26,7 @@ def __main__(camara = 0):
     VID.release()
     # Destroy all the windows
     cv2.destroyAllWindows()
+
+
 
     __main__()
