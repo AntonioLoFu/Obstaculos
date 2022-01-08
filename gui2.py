@@ -4,7 +4,7 @@ from PIL import Image
 from PIL import ImageTk
 import cv2
 import imutils
-
+from test_lineas import detectaObstaculos, determinaROI, procesaFrame
 video = None
 video2 = None
 video3 = None
@@ -48,19 +48,18 @@ def muestra_video():
 
         ret, frame = video.read()
         if(ret == True):
-            frame = imutils.resize(frame, 640, 360)
+            frame = procesaFrame(frame)
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
             im = Image.fromarray(frame)
             img = ImageTk.PhotoImage(image = im)
 
-            lbl_video.configure(image = img)
-            lbl_video.image = img
-            lbl_video.after(16, muestra_video)
+            lbl_video2.configure(image = img)
+            lbl_video2.image = img
+            lbl_video2.after(16, muestra_video)
 
         else:
             lbl_info2.configure(text="No se ha seleccionado un vídeo todavía")
-            lbl_video.image = ""
+            lbl_video2.image = ""
             video.release()        
 
 def muestra_video2():
@@ -69,19 +68,19 @@ def muestra_video2():
 
         ret, frame = video2.read()
         if(ret == True):
-            frame = imutils.resize(frame, 640, 360)
+            frame = detectaObstaculos(frame, frame)[1]
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
             im = Image.fromarray(frame)
             img = ImageTk.PhotoImage(image = im)
 
-            lbl_video2.configure(image = img)
-            lbl_video2.image = img
-            lbl_video2.after(16, muestra_video2)
+            lbl_video3.configure(image = img)
+            lbl_video3.image = img
+            lbl_video3.after(16, muestra_video2)
 
         else:
             lbl_info2.configure(text="No se ha seleccionado un vídeo todavía")
-            lbl_video2.image = ""
+            lbl_video3.image = ""
             video2.release()       
 
 def muestra_video3():
@@ -96,13 +95,13 @@ def muestra_video3():
             im = Image.fromarray(frame)
             img = ImageTk.PhotoImage(image = im)
 
-            lbl_video3.configure(image = img)
-            lbl_video3.image = img
-            lbl_video3.after(16, muestra_video3)
+            lbl_video.configure(image = img)
+            lbl_video.image = img
+            lbl_video.after(16, muestra_video3)
 
         else:
             lbl_info2.configure(text="No se ha seleccionado un vídeo todavía")
-            lbl_video3.image = ""
+            lbl_video.image = ""
             video3.release()        
 
 
