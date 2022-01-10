@@ -41,12 +41,6 @@ def detectaObstaculos(frame1, imagen):
     contours, _ = cv2.findContours(dilatado,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     cv2.drawContours(imagen, contours, -1, (0,255,0), 3)
 
-    #FILTRAMOS LOS CONTORNOS POR TAMAÑO Y CREAMOS UN RECTÁNGULO MÍNIMO QUE LOS CONTENGA
-    for cnt in contours:
-        if 300 < cv2.contourArea(cnt) < 2000:
-            x,y,w,h = cv2.boundingRect(cnt)
-            cv2.rectangle(imagen,(x,y),(x+w,y+h),(255,0,0),3)
-
     return (imagen, binarizado) #DEVOLVEMOS LA IMAGEN TRAS EL PROCESADO Y EL BINARIZADO QUE NOS SERVIRÁ PARA MOSTRARLO EN LA INTERFAZ
 
 #ESTA FUNCIÓN RECIBE UN FRAME DE UN VIDEO, LO PROCESA Y LO DEVUELVE
